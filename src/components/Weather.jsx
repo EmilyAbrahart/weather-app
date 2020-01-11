@@ -1,34 +1,135 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import OneDayWeather from './OneDayWeather';
+import FiveDayWeather from './FiveDayWeather';
+import { FlexFunc } from '../styles/styles';
 
-const Weather = ({ city, country, weather }) => {
+const Weather = ({ city, country, weather, isLoading, units }) => {
   return (
-    <div>
-      {city && country && (
+    // isLoading ? show spinner : hasData ? show components : null
+    // this ensures that the correct information is displayed at the correct time.
+
+    <Container>
+      {isLoading ? (
+        <SpinnerDiv>
+          <div className="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </SpinnerDiv>
+      ) : weather ? (
         <div>
           <div>
             {city}, {country}
           </div>
-          <div>
-            <h4>Conditions</h4>
-            {weather.general && <div>{weather.general}</div>}
-          </div>
-          <div>
-            <h4>Temperature</h4>
-            {weather.temp && <div>{weather.temp}</div>}
-            {weather.temp_min && <div>Min Temp: {weather.temp_min}</div>}
-            {weather.temp_max && <div>Max Temp: {weather.temp_max}</div>}
-            {weather.temp_feel && <div>Feels Like: {weather.temp_feel}</div>}
-            {weather.humidity && <div>Humidity: {weather.humidity}</div>}
-            {weather.wind_speed && <div>Wind: {weather.wind_speed}</div>}
-          </div>
-          <div>
-            {weather.sunrise && <div>Sunrise: {weather.sunrise}</div>}
-            {weather.sunset && <div>Sunset: {weather.sunset}</div>}
-          </div>
+          <WeatherContainer>
+            <OneDayWeather weather={weather} units={units} />
+            <FiveDayWeather weather={weather} units={units} />
+          </WeatherContainer>
         </div>
-      )}
-    </div>
+      ) : null}
+    </Container>
   );
 };
 
 export default Weather;
+
+const Container = styled.div`
+  ${FlexFunc('row', 'space-evenly', 'center')}
+  width: 100%;
+`;
+
+const WeatherContainer = styled.div`
+  ${FlexFunc('row', 'space-evenly', 'flex-start')}
+`;
+
+const SpinnerDiv = styled.div`
+  .lds-spinner {
+    color: official;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-spinner div {
+    transform-origin: 40px 40px;
+    animation: lds-spinner 1.2s linear infinite;
+  }
+  .lds-spinner div:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 37px;
+    width: 6px;
+    height: 18px;
+    border-radius: 20%;
+    background: #fff;
+  }
+  .lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+  }
+  .lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+  }
+  .lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+  }
+  .lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+  }
+  .lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+  }
+  .lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+  }
+  .lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+  }
+  .lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+  }
+  .lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+  }
+  .lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+  }
+  .lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+  }
+  .lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+  }
+  @keyframes lds-spinner {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+`;

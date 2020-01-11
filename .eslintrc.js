@@ -19,6 +19,7 @@ module.exports = {
   rules: {
     camelcase: 'off',
     'react/prop-types': 'off',
-    'react/jsx-one-expression-per-line': 'off'
+    'react/jsx-one-expression-per-line': 'off',
+    'no-nested-ternary': 'off'
   }
 };

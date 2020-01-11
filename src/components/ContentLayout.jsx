@@ -1,15 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color_dark, color_subtle } from '../styles/styles';
+import { FlexFunc, color_dark, color_subtle } from '../styles/styles';
 import Form from './Form';
 import Weather from './Weather';
 
-const ContentLayout = ({ getWeather, city, country, weather }) => {
+const ContentLayout = ({
+  getWeather,
+  city,
+  country,
+  weather,
+  setUnits,
+  units,
+  isLoading
+}) => {
   return (
     <ContentLayoutContainer>
       <h1> WTHR. </h1>
-      <Form getWeather={getWeather} />
-      <Weather weather={weather} city={city} country={country} />
+
+      <ContentContainer>
+        <Form getWeather={getWeather} setUnits={setUnits} />
+        <Weather
+          weather={weather}
+          city={city}
+          country={country}
+          isLoading={isLoading}
+          units={units}
+        />
+      </ContentContainer>
     </ContentLayoutContainer>
   );
 };
@@ -17,9 +34,17 @@ const ContentLayout = ({ getWeather, city, country, weather }) => {
 export default ContentLayout;
 
 const ContentLayoutContainer = styled.div`
+  ${FlexFunc('column', 'center', 'center')}
   width: 80%;
   height: 70%;
   background-color: ${color_dark};
   color: ${color_subtle};
-  border-radius: 1%;
 `;
+
+const ContentContainer = styled.div`
+  ${FlexFunc('row', 'space-evenly', 'center')}
+  width: 80%;
+  height: 70%;
+  background-color: ${color_dark};
+  color: ${color_subtle};
+`
