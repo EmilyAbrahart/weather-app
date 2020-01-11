@@ -2,7 +2,7 @@
 // VARIABLES
 // Colors
 export const color_light = '#ffffff';
-export const color_dark = '#1C1B20';
+export const color_dark = '#131b24';
 export const color_dark_blue = '#273648';
 export const color_accent = '#fE512E';
 export const color_subtle = '#F8F8F8';
