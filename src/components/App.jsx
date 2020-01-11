@@ -12,6 +12,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState('');
   const [error, setError] = useState('');
+  const [active, setActive] = useState('one')
 
   const getWeather = e => {
     setIsLoading(true);
@@ -38,8 +39,6 @@ function App() {
           description: data.data.list[0].weather[0].description,
           icon: data.data.list[0].weather[0].icon,
           temp: data.data.list[0].main.temp,
-          temp_min: data.data.list[0].main.temp_min,
-          temp_max: data.data.list[0].main.temp_max,
           temp_feel: data.data.list[0].main.feels_like,
           humidity: data.data.list[0].main.humidity,
           wind_speed: data.data.list[0].wind.speed
@@ -50,8 +49,6 @@ function App() {
           description: data.data.list[8].weather[0].description,
           icon: data.data.list[8].weather[0].icon,
           temp: data.data.list[8].main.temp,
-          temp_min: data.data.list[8].main.temp_min,
-          temp_max: data.data.list[8].main.temp_max,
           temp_feel: data.data.list[8].main.feels_like,
           humidity: data.data.list[8].main.humidity,
           wind_speed: data.data.list[8].wind.speed
@@ -62,8 +59,6 @@ function App() {
           description: data.data.list[16].weather[0].description,
           icon: data.data.list[16].weather[0].icon,
           temp: data.data.list[16].main.temp,
-          temp_min: data.data.list[16].main.temp_min,
-          temp_max: data.data.list[16].main.temp_max,
           temp_feel: data.data.list[16].main.feels_like,
           humidity: data.data.list[16].main.humidity,
           wind_speed: data.data.list[16].wind.speed
@@ -74,8 +69,6 @@ function App() {
           description: data.data.list[24].weather[0].description,
           icon: data.data.list[24].weather[0].icon,
           temp: data.data.list[24].main.temp,
-          temp_min: data.data.list[24].main.temp_min,
-          temp_max: data.data.list[24].main.temp_max,
           temp_feel: data.data.list[24].main.feels_like,
           humidity: data.data.list[24].main.humidity,
           wind_speed: data.data.list[24].wind.speed
@@ -86,8 +79,6 @@ function App() {
           description: data.data.list[32].weather[0].description,
           icon: data.data.list[32].weather[0].icon,
           temp: data.data.list[32].main.temp,
-          temp_min: data.data.list[32].main.temp_min,
-          temp_max: data.data.list[32].main.temp_max,
           temp_feel: data.data.list[32].main.feels_like,
           humidity: data.data.list[32].main.humidity,
           wind_speed: data.data.list[32].wind.speed
@@ -108,6 +99,8 @@ function App() {
         setUnits={setUnits}
         units={units}
         isLoading={isLoading}
+        active={active}
+        setActive={setActive}
       />
     </AppContainer>
   );
@@ -120,5 +113,6 @@ const AppContainer = styled.div`
   background-position: fixed;
   ${FlexFunc('column', 'center', 'center')};
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  overflow-y: hidden;
 `;

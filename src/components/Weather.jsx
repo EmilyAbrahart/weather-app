@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import OneDayWeather from './OneDayWeather';
 import FiveDayWeather from './FiveDayWeather';
 import { FlexFunc } from '../styles/styles';
 
-const Weather = ({ city, country, weather, isLoading, units }) => {
+const Weather = ({ city, country, weather, isLoading, units, active, setActive }) => {
   return (
     // isLoading ? show spinner : hasData ? show components : null
     // this ensures that the correct information is displayed at the correct time.
@@ -13,18 +13,18 @@ const Weather = ({ city, country, weather, isLoading, units }) => {
       {isLoading ? (
         <SpinnerDiv>
           <div className="lds-spinner">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
           </div>
         </SpinnerDiv>
       ) : weather ? (
@@ -33,8 +33,8 @@ const Weather = ({ city, country, weather, isLoading, units }) => {
             {city}, {country}
           </div>
           <WeatherContainer>
-            <OneDayWeather weather={weather} units={units} />
-            <FiveDayWeather weather={weather} units={units} />
+            <OneDayWeather weather={weather} units={units} active={active} />
+            <FiveDayWeather weather={weather} units={units} setActive={setActive} />
           </WeatherContainer>
         </div>
       ) : null}
@@ -47,6 +47,7 @@ export default Weather;
 const Container = styled.div`
   ${FlexFunc('row', 'space-evenly', 'center')}
   width: 100%;
+  max-height: 80vh;
 `;
 
 const WeatherContainer = styled.div`

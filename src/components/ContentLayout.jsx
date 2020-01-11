@@ -11,7 +11,9 @@ const ContentLayout = ({
   weather,
   setUnits,
   units,
-  isLoading
+  isLoading,
+  active,
+  setActive
 }) => {
   return (
     <ContentLayoutContainer>
@@ -25,6 +27,8 @@ const ContentLayout = ({
           country={country}
           isLoading={isLoading}
           units={units}
+          active={active}
+          setActive={setActive}
         />
       </ContentContainer>
     </ContentLayoutContainer>
@@ -37,6 +41,7 @@ const ContentLayoutContainer = styled.div`
   ${FlexFunc('column', 'center', 'center')}
   width: 80%;
   height: 70%;
+  max-height: 70vh;
   background-color: ${color_dark};
   color: ${color_subtle};
 `;
@@ -47,4 +52,4 @@ const ContentContainer = styled.div`
   height: 70%;
   background-color: ${color_dark};
   color: ${color_subtle};
-`
+`;

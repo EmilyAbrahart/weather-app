@@ -1,20 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 import WeatherDayUnit from './WeatherDayUnit';
+import { FlexFunc } from '../styles/styles';
 
-const FiveDayWeather = ({ weather, units }) => {
+const FiveDayWeather = ({ weather, units, setActive }) => {
   return (
     <div>
       <h3>5 Day Forecast</h3>
-      <div>
-        <WeatherDayUnit weather={weather} units={units} day='one' />
-        <WeatherDayUnit weather={weather} units={units} day='two' />
-        <WeatherDayUnit weather={weather} units={units} day='three' />
-        <WeatherDayUnit weather={weather} units={units} day='four' />
-        <WeatherDayUnit weather={weather} units={units} day='five' />
-      </div>
+      <WeatherContainer>
+        <WeatherDayUnit weather={weather} units={units} setActive={setActive} day="one" />
+        <WeatherDayUnit weather={weather} units={units} setActive={setActive} day="two" />
+        <WeatherDayUnit weather={weather} units={units} setActive={setActive} day="three" />
+        <WeatherDayUnit weather={weather} units={units} setActive={setActive} day="four" />
+        <WeatherDayUnit weather={weather} units={units} setActive={setActive} day="five" />
+      </WeatherContainer>
     </div>
   );
 };
 
 export default FiveDayWeather;
+
+const WeatherContainer = styled.div`
+  ${FlexFunc('row', 'space-evenly', 'center')}
+  flex-wrap: wrap;
+`;

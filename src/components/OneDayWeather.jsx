@@ -1,43 +1,32 @@
 import React from 'react';
+import moment from 'moment';
 
-const OneDayWeather = ({ weather, units }) => {
+const OneDayWeather = ({ weather, units, active }) => {
   return (
     <div>
-      <h3>Today</h3>
+      <h3>{active === 'one' ? 'Today' : moment(weather[active].date).format('dddd')}</h3>
       <div>
         <h4>Conditions</h4>
-        {weather.one.general && <div>{weather.one.general}</div>}
+        {weather[active].general && <div>{weather[active].general}</div>}
       </div>
       <div>
         <h4>Temperature</h4>
-        {weather.one.temp && (
+        {weather[active].temp && (
           <div>
-            {Math.round(weather.one.temp)}
+            {Math.round(weather[active].temp)}
             {units === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
           </div>
         )}
-        {weather.one.temp_min && (
+        {weather[active].temp_feel && (
           <div>
-            Min Temp: {Math.round(weather.one.temp_min)}
+            Feels Like: {Math.round(weather[active].temp_feel)}
             {units === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
           </div>
         )}
-        {weather.one.temp_max && (
+        {weather[active].humidity && <div>Humidity: {Math.round(weather[active].humidity)}% </div>}
+        {weather[active].wind_speed && (
           <div>
-            Max Temp: {Math.round(weather.one.temp_max)}
-            {units === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
-          </div>
-        )}
-        {weather.one.temp_feel && (
-          <div>
-            Feels Like: {Math.round(weather.one.temp_feel)}
-            {units === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
-          </div>
-        )}
-        {weather.one.humidity && <div>Humidity: {Math.round(weather.one.humidity)}% </div>}
-        {weather.one.wind_speed && (
-          <div>
-            Wind: {Math.round(weather.one.wind_speed)}
+            Wind: {Math.round(weather[active].wind_speed)}
             {units === 'metric' ? 'm/s' : 'mph'}
           </div>
         )}
