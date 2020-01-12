@@ -12,7 +12,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState('');
   const [error, setError] = useState('');
-  const [active, setActive] = useState('one')
+  const [active, setActive] = useState('one');
 
   const getWeather = e => {
     setIsLoading(true);
@@ -24,7 +24,10 @@ function App() {
     axios
       .get(url)
       .then(res => setData(res))
-      .catch(err => setError(err));
+      .catch(err => {
+        setError(err);
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -101,6 +104,7 @@ function App() {
         isLoading={isLoading}
         active={active}
         setActive={setActive}
+        error={error}
       />
     </AppContainer>
   );

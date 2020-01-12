@@ -13,7 +13,8 @@ const ContentLayout = ({
   units,
   isLoading,
   active,
-  setActive
+  setActive,
+  error
 }) => {
   return (
     <ContentLayoutContainer>
@@ -26,6 +27,7 @@ const ContentLayout = ({
         units={units}
         active={active}
         setActive={setActive}
+        error={error}
       />
     </ContentLayoutContainer>
   );
@@ -39,14 +41,6 @@ const ContentLayoutContainer = styled.div`
   height: 70%;
   max-height: 70vh;
   max-width: 1024px;
-  background-color: ${color_dark};
-  color: ${color_subtle};
-`;
-
-const ContentContainer = styled.div`
-  ${FlexFunc('row', 'space-evenly', 'center')}
-  width: 80%;
-  height: 70%;
   background-color: ${color_dark};
   color: ${color_subtle};
 `;

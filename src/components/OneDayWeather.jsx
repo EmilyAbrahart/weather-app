@@ -28,24 +28,25 @@ const OneDayWeather = ({ weather, units, active, city, country }) => {
               {units === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
             </Temp>
           )}
+          <Details>
+            {weather[active].temp_feel && (
+              <div>
+                Feels Like: {Math.round(weather[active].temp_feel)}
+                {units === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
+              </div>
+            )}
+            {weather[active].humidity && (
+              <div>Humidity: {Math.round(weather[active].humidity)}% </div>
+            )}
+            {weather[active].wind_speed && (
+              <div>
+                Wind: {Math.round(weather[active].wind_speed)}
+                {units === 'metric' ? 'm/s' : 'mph'}
+              </div>
+            )}
+          </Details>
         </Main>
       </BannerContainer>
-
-      <Details>
-        {weather[active].temp_feel && (
-          <div>
-            Feels Like: {Math.round(weather[active].temp_feel)}
-            {units === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
-          </div>
-        )}
-        {weather[active].humidity && <div>Humidity: {Math.round(weather[active].humidity)}% </div>}
-        {weather[active].wind_speed && (
-          <div>
-            Wind: {Math.round(weather[active].wind_speed)}
-            {units === 'metric' ? 'm/s' : 'mph'}
-          </div>
-        )}
-      </Details>
     </OneDayWeatherContainer>
   );
 };
@@ -63,7 +64,7 @@ const OneDayWeatherContainer = styled.div`
 const Title = styled.div`
   ${FlexFunc('row', 'flex-start', 'baseline')}
   height: 100%;
-  width: 100%;
+  letter-spacing: 0.2rem;
   h3 {
     padding-right: 1rem;
   }
@@ -79,21 +80,22 @@ const Main = styled.div`
 
 const Temp = styled.div`
   font-size: 5rem;
-  width: 50%;
 `;
 
 const Details = styled.div`
   ${FlexFunc('column', 'space-evenly', 'flex-end')}
-  width: 100%;
+  div {
+    padding: 1rem 0;
+    letter-spacing: 0.2rem;
+  }
 `;
 
 const BannerContainer = styled.div`
   width: 100%;
   height: 100%;
+
 `;
 
 const Image = styled.div`
-  width: 50%;
-  height: 60%;
   ${FlexFunc('column', 'center', 'center')}
 `;

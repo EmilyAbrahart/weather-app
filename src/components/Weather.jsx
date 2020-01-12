@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import OneDayWeather from './OneDayWeather';
 import FiveDayWeather from './FiveDayWeather';
-import { FlexFunc, color_light_blue } from '../styles/styles';
+import { FlexFunc } from '../styles/styles';
 
-const Weather = ({ city, country, weather, isLoading, units, active, setActive }) => {
+const Weather = ({ city, country, weather, isLoading, units, active, setActive, error }) => {
   return (
-    // isLoading ? show spinner : hasData ? show components : null
+    // isLoading ? show spinner : error ? show error : weather ? show components : null
     // this ensures that the correct information is displayed at the correct time.
 
     <Container>
@@ -27,6 +27,8 @@ const Weather = ({ city, country, weather, isLoading, units, active, setActive }
             <div />
           </div>
         </SpinnerDiv>
+      ) : error ? (
+        <div>No results found for that location.</div>
       ) : weather ? (
         <WeatherContainer>
           <OneDayWeather
@@ -36,7 +38,7 @@ const Weather = ({ city, country, weather, isLoading, units, active, setActive }
             city={city}
             country={country}
           />
-          <FiveDayWeather weather={weather} units={units} setActive={setActive} />
+          <FiveDayWeather weather={weather} units={units} setActive={setActive} active={active} />
         </WeatherContainer>
       ) : null}
     </Container>
