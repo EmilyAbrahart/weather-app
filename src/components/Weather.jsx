@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import OneDayWeather from './OneDayWeather';
 import FiveDayWeather from './FiveDayWeather';
-import { FlexFunc } from '../styles/styles';
+import { FlexFunc, color_light_blue } from '../styles/styles';
 
 const Weather = ({ city, country, weather, isLoading, units, active, setActive }) => {
   return (
@@ -28,15 +28,16 @@ const Weather = ({ city, country, weather, isLoading, units, active, setActive }
           </div>
         </SpinnerDiv>
       ) : weather ? (
-        <div>
-          <div>
-            {city}, {country}
-          </div>
-          <WeatherContainer>
-            <OneDayWeather weather={weather} units={units} active={active} />
-            <FiveDayWeather weather={weather} units={units} setActive={setActive} />
-          </WeatherContainer>
-        </div>
+        <WeatherContainer>
+          <OneDayWeather
+            weather={weather}
+            units={units}
+            active={active}
+            city={city}
+            country={country}
+          />
+          <FiveDayWeather weather={weather} units={units} setActive={setActive} />
+        </WeatherContainer>
       ) : null}
     </Container>
   );
@@ -48,10 +49,14 @@ const Container = styled.div`
   ${FlexFunc('row', 'space-evenly', 'center')}
   width: 100%;
   max-height: 80vh;
+  height: 100%;
+  width: 100%;
 `;
 
 const WeatherContainer = styled.div`
-  ${FlexFunc('row', 'space-evenly', 'flex-start')}
+  ${FlexFunc('column', 'center', 'center')}
+  height: 100%;
+  width: 100%;
 `;
 
 const SpinnerDiv = styled.div`

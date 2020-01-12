@@ -17,20 +17,16 @@ const ContentLayout = ({
 }) => {
   return (
     <ContentLayoutContainer>
-      <h1> WTHR. </h1>
-
-      <ContentContainer>
-        <Form getWeather={getWeather} setUnits={setUnits} />
-        <Weather
-          weather={weather}
-          city={city}
-          country={country}
-          isLoading={isLoading}
-          units={units}
-          active={active}
-          setActive={setActive}
-        />
-      </ContentContainer>
+      <Form getWeather={getWeather} setUnits={setUnits} units={units} />
+      <Weather
+        weather={weather}
+        city={city}
+        country={country}
+        isLoading={isLoading}
+        units={units}
+        active={active}
+        setActive={setActive}
+      />
     </ContentLayoutContainer>
   );
 };
@@ -38,10 +34,11 @@ const ContentLayout = ({
 export default ContentLayout;
 
 const ContentLayoutContainer = styled.div`
-  ${FlexFunc('column', 'center', 'center')}
+  ${FlexFunc('row', 'space-evenly', 'center')}
   width: 80%;
   height: 70%;
   max-height: 70vh;
+  max-width: 1024px;
   background-color: ${color_dark};
   color: ${color_subtle};
 `;
