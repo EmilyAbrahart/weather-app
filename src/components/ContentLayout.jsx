@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FlexFunc, color_dark, color_subtle } from '../styles/styles';
+import { FlexFunc, color_dark, color_subtle, tablet } from '../styles/styles';
 import Form from './Form';
 import Weather from './Weather';
 
@@ -19,6 +19,9 @@ const ContentLayout = ({
   setSearchCity,
   searchCountry,
   setSearchCountry,
+  missingQuery,
+  formVisible,
+  setFormVisible
 }) => {
   return (
     <ContentLayoutContainer>
@@ -30,6 +33,8 @@ const ContentLayout = ({
         searchCountry={searchCountry}
         setSearchCity={setSearchCity}
         setSearchCountry={setSearchCountry}
+        formVisible={formVisible}
+        setFormVisible={setFormVisible}
       />
       <Weather
         weather={weather}
@@ -40,6 +45,7 @@ const ContentLayout = ({
         active={active}
         setActive={setActive}
         error={error}
+        missingQuery={missingQuery}
       />
     </ContentLayoutContainer>
   );
@@ -52,7 +58,13 @@ const ContentLayoutContainer = styled.div`
   width: 80%;
   height: 70%;
   max-height: 70vh;
-  max-width: 1024px;
   background-color: ${color_dark};
   color: ${color_subtle};
+
+  @media ${tablet} {
+    ${FlexFunc('column', 'center', 'center')};
+    max-height: initial;
+    height: 100%;
+    width:100%;
+	}
 `;

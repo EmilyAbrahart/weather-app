@@ -9,8 +9,8 @@ export const color_subtle = '#F8F8F8';
 export const color_light_blue = '#1fd1c3'
 
 // Media Queries
-export const mobile = '(max-device-width : 480px)';
-export const tablet = '(max-device-width : 1024px)';
+export const mobile = '(max-device-width : 580px)';
+export const tablet = '(max-device-width : 1050px)';
 
 // FUNCTIONS
 // Flexbox

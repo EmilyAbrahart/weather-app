@@ -1,6 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FlexFunc, color_subtle, color_light_blue, color_dark } from '../styles/styles';
+import {
+  FlexFunc,
+  color_subtle,
+  color_light_blue,
+  color_dark,
+  mobile,
+  tablet,
+} from '../styles/styles';
 import { SearchBar } from './SearchBar';
 
 const Form = ({
@@ -11,6 +18,8 @@ const Form = ({
   setSearchCity,
   searchCountry,
   setSearchCountry,
+  formVisible,
+  setFormVisible,
 }) => {
   const setMetric = () => {
     setUnits('metric');
@@ -22,17 +31,22 @@ const Form = ({
     setSearchCity(e.target.value);
   };
   return (
-    <FormContainer units={units}>
+    <FormContainer units={units} formVisible={formVisible}>
       <h1> WTHR. </h1>
-      <StyledForm onSubmit={getWeather}>
+      <StyledForm onSubmit={getWeather} formVisible={formVisible}>
         <FormInput
           type="text"
           name="city"
           placeholder="City"
           onChange={handleCityChange}
           value={searchCity}
+          formVisible={formVisible}
         />
-        <SearchBar searchCountry={searchCountry} setSearchCountry={setSearchCountry} />
+        <SearchBar
+          searchCountry={searchCountry}
+          setSearchCountry={setSearchCountry}
+          formVisible={formVisible}
+        />
         <UnitContainer units={units}>
           <MetricButton units={units} type="button" onClick={setMetric}>
             Metric
@@ -44,6 +58,9 @@ const Form = ({
 
         <FormButton type="submit">Get Weather</FormButton>
       </StyledForm>
+      <SearchButton formVisible={formVisible} onClick={() => setFormVisible(true)}>
+        Search
+      </SearchButton>
     </FormContainer>
   );
 };
@@ -58,11 +75,25 @@ const FormContainer = styled.div`
   h1 {
     align-self: center;
     font-size: 3rem;
+
+    @media ${mobile} {
+      margin-bottom: ${(props) => (props.formVisible ? '1rem' : '0')};
+    }
+  }
+
+  @media ${tablet} {
+    ${FlexFunc('column', 'center', 'center')};
+    height: auto;
   }
 `;
 
 const StyledForm = styled.form`
   ${FlexFunc('column', 'space-evenly', 'center')}
+  @media ${mobile} {
+    transition: all 0.5s linear;
+    max-height: ${(props) => (props.formVisible ? 'initial' : '0')};
+    overflow-y: ${(props) => (props.formVisible ? 'initial' : 'hidden')}
+  }
 `;
 
 const FormInput = styled.input`
@@ -75,6 +106,9 @@ const FormInput = styled.input`
   padding: 0.3rem;
   margin: 1rem;
   width: 15rem;
+  @media ${mobile} {
+    display: ${(props) => (props.formVisible ? 'initial' : 'none')};
+  }
 `;
 
 const UnitContainer = styled.div`
@@ -121,4 +155,12 @@ const ImperialButton = styled(UnitButton)`
   box-shadow: ${(props) => (props.units === 'imperial' ? `inset 0 3px 8px ${color_dark}` : 'none')};
   cursor: ${(props) => (props.units === 'imperial' ? 'default' : 'pointer')};
   border-radius: 0 1rem 1rem 0;
+`;
+
+const SearchButton = styled(FormButton)`
+  display: none;
+  margin: 0;
+  @media ${mobile} {
+    display: ${(props) => (props.formVisible ? 'none' : 'flex')};
+  }
 `;

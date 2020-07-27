@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
-import { FlexFunc } from '../styles/styles';
+import { FlexFunc, mobile } from '../styles/styles';
 
 const OneDayWeather = ({ weather, units, active, city, country }) => {
   return (
@@ -59,6 +59,11 @@ const OneDayWeatherContainer = styled.div`
   width: 100%;
   padding: 2rem;
   position: relative;
+  @media ${mobile} {
+    ${FlexFunc('column', 'space-evenly', 'center')};
+    max-height: initial;
+    height: auto;
+  }
 `;
 
 const Title = styled.div`
@@ -76,6 +81,9 @@ const Title = styled.div`
 const Main = styled.div`
   ${FlexFunc('row', 'space-between', 'center')}
   width: 100%;
+  @media ${mobile} {
+    ${FlexFunc('column', 'space-evenly', 'center')};
+  }
 `;
 
 const Temp = styled.div`
@@ -88,12 +96,15 @@ const Details = styled.div`
     padding: 1rem 0;
     letter-spacing: 0.2rem;
   }
+  @media ${mobile} {
+    text-align: center;
+    align-items: center;
+  }
 `;
 
 const BannerContainer = styled.div`
   width: 100%;
   height: 100%;
-
 `;
 
 const Image = styled.div`

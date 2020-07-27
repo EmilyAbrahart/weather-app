@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import ContentLayout from './ContentLayout';
-import { FlexFunc, color_dark } from '../styles/styles';
+import { FlexFunc, color_dark, tablet } from '../styles/styles';
 
 function App() {
   const [weather, setWeather] = useState('');
@@ -15,19 +15,34 @@ function App() {
   const [active, setActive] = useState('one');
   const [searchCity, setSearchCity] = useState('');
   const [searchCountry, setSearchCountry] = useState('');
+  const [missingQuery, setMissingQuery] = useState(false);
+  const [formVisible, setFormVisible] = useState(true);
 
   const getWeather = (e) => {
-    setIsLoading(true);
     e.preventDefault();
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${searchCity},${searchCountry}&APPID=${process.env.REACT_APP_WEATHER_API_KEY}&units=${units}`;
+    setMissingQuery(false);
+    setError('');
 
-    axios
-      .get(url)
-      .then((res) => setData(res))
-      .catch((err) => {
-        setError(err);
-        setIsLoading(false);
-      });
+    if (searchCity && searchCountry) {
+      setIsLoading(true);
+
+      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${searchCity},${searchCountry}&APPID=${process.env.REACT_APP_WEATHER_API_KEY}&units=${units}`;
+
+      axios
+        .get(url)
+        .then((res) => {
+          setData(res);
+          setFormVisible(false);
+        })
+        .catch((err) => {
+          setError(err);
+          setIsLoading(false);
+        });
+    } else {
+      setMissingQuery(true);
+      setIsLoading(false);
+      setFormVisible(true);
+    }
   };
 
   useEffect(() => {
@@ -109,6 +124,9 @@ function App() {
         setSearchCity={setSearchCity}
         searchCountry={searchCountry}
         setSearchCountry={setSearchCountry}
+        missingQuery={missingQuery}
+        formVisible={formVisible}
+        setFormVisible={setFormVisible}
       />
     </AppContainer>
   );
@@ -123,4 +141,10 @@ const AppContainer = styled.div`
   width: 100%;
   min-height: 100vh;
   overflow-y: hidden;
+  @media ${tablet} {
+    max-height: initial;
+    height: auto;
+    overflow-y: scroll;
+    padding-top: 5rem;
+  }
 `;

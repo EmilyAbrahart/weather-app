@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Autosuggest from 'react-autosuggest';
 import { countryCodes } from '../data/countryCodes';
-import { color_subtle, color_light_blue, color_dark } from '../styles/styles';
+import { color_subtle, color_light_blue, color_dark, mobile } from '../styles/styles';
 
-export const SearchBar = ({ searchCountry, setSearchCountry }) => {
+export const SearchBar = ({ searchCountry, setSearchCountry, formVisible }) => {
   const [suggestions, setSuggestions] = useState([]);
 
   const getSuggestions = (v) => {
@@ -42,7 +43,7 @@ export const SearchBar = ({ searchCountry, setSearchCountry }) => {
   };
 
   return (
-    <SearchContainer>
+    <SearchContainer formVisible={formVisible}>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -74,6 +75,9 @@ const SearchContainer = styled.div`
     margin: 1rem;
     width: 15rem;
     margin-bottom: 0;
+    @media ${mobile} {
+      display: ${(props) => (props.formVisible ? 'initial' : 'none')};
+    }
   }
 
   .react-autosuggest__container .react-autosuggest__suggestions-container {
