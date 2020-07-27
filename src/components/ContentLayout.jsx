@@ -55,7 +55,7 @@ const ContentLayout = ({
 export default ContentLayout;
 
 const ContentLayoutContainer = styled.div`
-  ${FlexFunc('row', 'space-evenly', 'center')}
+  ${FlexFunc('row', 'center', 'center')}
   width: 80%;
   height: 70%;
   max-height: 70vh;
@@ -68,6 +68,7 @@ const ContentLayoutContainer = styled.div`
     max-height: initial;
     height: 100%;
     width: 100%;
+    max-width: 90%;
   }
 `;
 

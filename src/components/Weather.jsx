@@ -63,14 +63,15 @@ export default Weather;
 
 const Container = styled.div`
   ${FlexFunc('row', 'space-evenly', 'center')}
-  width: 100%;
   max-height: 80vh;
   height: 100%;
-  width: 100%;
+  max-width: 100%;
+  transition: all 0.5s linear;
   @media ${mobile} {
     ${FlexFunc('column', 'flex-start', 'center')};
     max-height: initial;
     height: auto;
+    max-width: 100vh;
 	}
 `;
 

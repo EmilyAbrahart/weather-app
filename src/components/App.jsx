@@ -145,12 +145,12 @@ const AppContainer = styled.div`
   background-position: fixed;
   ${FlexFunc('column', 'center', 'center')};
   width: 100%;
+  max-width: 100vw;
   min-height: 100vh;
-  overflow-y: hidden;
+  overflow: hidden;
   @media ${tablet} {
     max-height: initial;
     height: auto;
-    overflow-y: scroll;
     padding-top: 5rem;
   }
 `;
@@ -167,6 +167,8 @@ const ThemeButton = styled.button`
   position: absolute;
   top: 1rem;
   left: 1rem;
+  ${FlexFunc('column', 'center', 'center')};
+
   svg {
     height: 1.5rem;
     fill: ${props => props.theme.accentColor};
