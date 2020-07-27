@@ -33,20 +33,6 @@ const Form = ({
           value={searchCity}
         />
         <SearchBar searchCountry={searchCountry} setSearchCountry={setSearchCountry} />
-        {/* <FormInput type="text" name="country" placeholder="Country" />
-        <div>
-          {codes.map((c) => (
-            <div value={c.code} id={c.code}>{`${c.name} (${c.code})`}</div>
-          ))}
-        </div> */}
-        {/* <FormSelect name="country">
-          <option value="" disabled selected>
-            Country
-          </option>
-          {countryCodes.map((c) => (
-            <option value={c.code} id={c.code}>{`${c.name} (${c.code})`}</option>
-          ))}
-        </FormSelect> */}
         <UnitContainer units={units}>
           <MetricButton units={units} type="button" onClick={setMetric}>
             Metric
@@ -89,22 +75,6 @@ const FormInput = styled.input`
   padding: 0.3rem;
   margin: 1rem;
   width: 15rem;
-`;
-
-const FormSelect = styled.select`
-  background: none;
-  color: ${color_subtle};
-  border: none;
-  border-bottom: 1px solid ${color_light_blue};
-  box-shadow: none;
-  outline: none;
-  padding: 0.3rem;
-  margin: 1rem;
-  width: 15rem;
-
-  option {
-    color: ${color_dark};
-  }
 `;
 
 const UnitContainer = styled.div`

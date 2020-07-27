@@ -16,17 +16,15 @@ function App() {
   const [searchCity, setSearchCity] = useState('');
   const [searchCountry, setSearchCountry] = useState('');
 
-  const getWeather = e => {
+  const getWeather = (e) => {
     setIsLoading(true);
     e.preventDefault();
-    const cityQuery = e.target.elements.city.value;
-    const countryQuery = e.target.elements.country.value;
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${cityQuery},${countryQuery}&APPID=${process.env.REACT_APP_WEATHER_API_KEY}&units=${units}`;
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${searchCity},${searchCountry}&APPID=${process.env.REACT_APP_WEATHER_API_KEY}&units=${units}`;
 
     axios
       .get(url)
-      .then(res => setData(res))
-      .catch(err => {
+      .then((res) => setData(res))
+      .catch((err) => {
         setError(err);
         setIsLoading(false);
       });
@@ -46,7 +44,7 @@ function App() {
           temp: data.data.list[0].main.temp,
           temp_feel: data.data.list[0].main.feels_like,
           humidity: data.data.list[0].main.humidity,
-          wind_speed: data.data.list[0].wind.speed
+          wind_speed: data.data.list[0].wind.speed,
         },
         two: {
           date: data.data.list[8].dt_txt,
@@ -56,7 +54,7 @@ function App() {
           temp: data.data.list[8].main.temp,
           temp_feel: data.data.list[8].main.feels_like,
           humidity: data.data.list[8].main.humidity,
-          wind_speed: data.data.list[8].wind.speed
+          wind_speed: data.data.list[8].wind.speed,
         },
         three: {
           date: data.data.list[16].dt_txt,
@@ -66,7 +64,7 @@ function App() {
           temp: data.data.list[16].main.temp,
           temp_feel: data.data.list[16].main.feels_like,
           humidity: data.data.list[16].main.humidity,
-          wind_speed: data.data.list[16].wind.speed
+          wind_speed: data.data.list[16].wind.speed,
         },
         four: {
           date: data.data.list[24].dt_txt,
@@ -76,7 +74,7 @@ function App() {
           temp: data.data.list[24].main.temp,
           temp_feel: data.data.list[24].main.feels_like,
           humidity: data.data.list[24].main.humidity,
-          wind_speed: data.data.list[24].wind.speed
+          wind_speed: data.data.list[24].wind.speed,
         },
         five: {
           date: data.data.list[32].dt_txt,
@@ -86,8 +84,8 @@ function App() {
           temp: data.data.list[32].main.temp,
           temp_feel: data.data.list[32].main.feels_like,
           humidity: data.data.list[32].main.humidity,
-          wind_speed: data.data.list[32].wind.speed
-        }
+          wind_speed: data.data.list[32].wind.speed,
+        },
       });
 
       setIsLoading(false);
