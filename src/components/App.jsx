@@ -13,6 +13,8 @@ function App() {
   const [data, setData] = useState('');
   const [error, setError] = useState('');
   const [active, setActive] = useState('one');
+  const [searchCity, setSearchCity] = useState('');
+  const [searchCountry, setSearchCountry] = useState('');
 
   const getWeather = e => {
     setIsLoading(true);
@@ -105,6 +107,10 @@ function App() {
         active={active}
         setActive={setActive}
         error={error}
+        searchCity={searchCity}
+        setSearchCity={setSearchCity}
+        searchCountry={searchCountry}
+        setSearchCountry={setSearchCountry}
       />
     </AppContainer>
   );

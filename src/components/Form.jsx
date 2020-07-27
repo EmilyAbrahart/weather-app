@@ -1,20 +1,52 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FlexFunc, color_subtle, color_light_blue, color_dark } from '../styles/styles';
+import { SearchBar } from './SearchBar';
 
-const Form = ({ getWeather, setUnits, units }) => {
+const Form = ({
+  getWeather,
+  setUnits,
+  units,
+  searchCity,
+  setSearchCity,
+  searchCountry,
+  setSearchCountry,
+}) => {
   const setMetric = () => {
     setUnits('metric');
   };
   const setImperial = () => {
     setUnits('imperial');
   };
+  const handleCityChange = (e) => {
+    setSearchCity(e.target.value);
+  };
   return (
     <FormContainer units={units}>
       <h1> WTHR. </h1>
       <StyledForm onSubmit={getWeather}>
-        <FormInput type="text" name="city" placeholder="City" />
-        <FormInput type="text" name="country" placeholder="Country" />
+        <FormInput
+          type="text"
+          name="city"
+          placeholder="City"
+          onChange={handleCityChange}
+          value={searchCity}
+        />
+        <SearchBar searchCountry={searchCountry} setSearchCountry={setSearchCountry} />
+        {/* <FormInput type="text" name="country" placeholder="Country" />
+        <div>
+          {codes.map((c) => (
+            <div value={c.code} id={c.code}>{`${c.name} (${c.code})`}</div>
+          ))}
+        </div> */}
+        {/* <FormSelect name="country">
+          <option value="" disabled selected>
+            Country
+          </option>
+          {countryCodes.map((c) => (
+            <option value={c.code} id={c.code}>{`${c.name} (${c.code})`}</option>
+          ))}
+        </FormSelect> */}
         <UnitContainer units={units}>
           <MetricButton units={units} type="button" onClick={setMetric}>
             Metric
@@ -56,6 +88,23 @@ const FormInput = styled.input`
   outline: none;
   padding: 0.3rem;
   margin: 1rem;
+  width: 15rem;
+`;
+
+const FormSelect = styled.select`
+  background: none;
+  color: ${color_subtle};
+  border: none;
+  border-bottom: 1px solid ${color_light_blue};
+  box-shadow: none;
+  outline: none;
+  padding: 0.3rem;
+  margin: 1rem;
+  width: 15rem;
+
+  option {
+    color: ${color_dark};
+  }
 `;
 
 const UnitContainer = styled.div`
@@ -89,17 +138,17 @@ const UnitButton = styled.button`
 `;
 
 const MetricButton = styled(UnitButton)`
-  background-color: ${props => (props.units === 'metric' ? color_light_blue : color_dark)};
-  color: ${props => (props.units === 'metric' ? color_dark : color_light_blue)};
-  box-shadow: ${props => (props.units === 'metric' ? 'inset 0 3px 8px #000' : 'none')};
-  cursor: ${props => (props.units === 'metric' ? 'default' : 'pointer')};
+  background-color: ${(props) => (props.units === 'metric' ? color_light_blue : color_dark)};
+  color: ${(props) => (props.units === 'metric' ? color_dark : color_light_blue)};
+  box-shadow: ${(props) => (props.units === 'metric' ? 'inset 0 3px 8px #000' : 'none')};
+  cursor: ${(props) => (props.units === 'metric' ? 'default' : 'pointer')};
   border-radius: 1rem 0 0 1rem;
 `;
 
 const ImperialButton = styled(UnitButton)`
-  background-color: ${props => (props.units === 'imperial' ? color_light_blue : color_dark)};
-  color: ${props => (props.units === 'imperial' ? color_dark : color_light_blue)};
-  box-shadow: ${props => (props.units === 'imperial' ? `inset 0 3px 8px ${color_dark}` : 'none')};
-  cursor: ${props => (props.units === 'imperial' ? 'default' : 'pointer')};
+  background-color: ${(props) => (props.units === 'imperial' ? color_light_blue : color_dark)};
+  color: ${(props) => (props.units === 'imperial' ? color_dark : color_light_blue)};
+  box-shadow: ${(props) => (props.units === 'imperial' ? `inset 0 3px 8px ${color_dark}` : 'none')};
+  cursor: ${(props) => (props.units === 'imperial' ? 'default' : 'pointer')};
   border-radius: 0 1rem 1rem 0;
 `;

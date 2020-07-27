@@ -14,11 +14,23 @@ const ContentLayout = ({
   isLoading,
   active,
   setActive,
-  error
+  error,
+  searchCity,
+  setSearchCity,
+  searchCountry,
+  setSearchCountry,
 }) => {
   return (
     <ContentLayoutContainer>
-      <Form getWeather={getWeather} setUnits={setUnits} units={units} />
+      <Form
+        getWeather={getWeather}
+        setUnits={setUnits}
+        units={units}
+        searchCity={searchCity}
+        searchCountry={searchCountry}
+        setSearchCity={setSearchCity}
+        setSearchCountry={setSearchCountry}
+      />
       <Weather
         weather={weather}
         city={city}
