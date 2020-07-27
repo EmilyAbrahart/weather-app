@@ -54,15 +54,16 @@ const OneDayWeather = ({ weather, units, active, city, country }) => {
 export default OneDayWeather;
 
 const OneDayWeatherContainer = styled.div`
-  ${FlexFunc('row', 'space-between', 'center')}
+  ${FlexFunc('row', 'center', 'center')}
   height: 100%;
-  width: 100%;
+  width: 80%;
   padding: 2rem;
   position: relative;
   @media ${mobile} {
     ${FlexFunc('column', 'space-evenly', 'center')};
     max-height: initial;
     height: auto;
+    width: 100%;
   }
 `;
 

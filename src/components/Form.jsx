@@ -2,9 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import {
   FlexFunc,
-  color_subtle,
-  color_light_blue,
-  color_dark,
   mobile,
   tablet,
 } from '../styles/styles';
@@ -98,9 +95,9 @@ const StyledForm = styled.form`
 
 const FormInput = styled.input`
   background: none;
-  color: ${color_subtle};
+  color: ${props => props.theme.primaryTextColor};
   border: none;
-  border-bottom: 1px solid ${color_light_blue};
+  border-bottom: 1px solid ${props => props.theme.accentColor};
   box-shadow: none;
   outline: none;
   padding: 0.3rem;
@@ -117,19 +114,19 @@ const UnitContainer = styled.div`
 `;
 
 const FormButton = styled.button`
-  color: ${color_dark};
-  background: ${color_light_blue};
+  color: ${props => props.theme.primaryColor};
+  background: ${props => props.theme.accentColor};
   padding: 0.5rem 2rem;
   border-radius: 1rem;
-  border: 2px solid ${color_light_blue};
+  border: 2px solid ${props => props.theme.accentColor};
   margin: 1rem;
   font-weight: bold;
   cursor: pointer;
   outline: none;
 
   &:hover {
-    background: ${color_dark};
-    color: ${color_light_blue};
+    background: ${props => props.theme.primaryColor};
+    color: ${props => props.theme.accentColor};
   }
 `;
 
@@ -142,17 +139,17 @@ const UnitButton = styled.button`
 `;
 
 const MetricButton = styled(UnitButton)`
-  background-color: ${(props) => (props.units === 'metric' ? color_light_blue : color_dark)};
-  color: ${(props) => (props.units === 'metric' ? color_dark : color_light_blue)};
-  box-shadow: ${(props) => (props.units === 'metric' ? 'inset 0 3px 8px #000' : 'none')};
+  background-color: ${(props) => (props.units === 'metric' ? props.theme.accentColor : props.theme.primaryColor)};
+  color: ${(props) => (props.units === 'metric' ? props.theme.primaryColor : props.theme.accentColor)};
+  /* box-shadow: ${(props) => (props.units === 'metric' ? 'inset 0 3px 8px #000' : 'none')}; */
   cursor: ${(props) => (props.units === 'metric' ? 'default' : 'pointer')};
   border-radius: 1rem 0 0 1rem;
 `;
 
 const ImperialButton = styled(UnitButton)`
-  background-color: ${(props) => (props.units === 'imperial' ? color_light_blue : color_dark)};
-  color: ${(props) => (props.units === 'imperial' ? color_dark : color_light_blue)};
-  box-shadow: ${(props) => (props.units === 'imperial' ? `inset 0 3px 8px ${color_dark}` : 'none')};
+  background-color: ${(props) => (props.units === 'imperial' ? props.theme.accentColor : props.theme.primaryColor)};
+  color: ${(props) => (props.units === 'imperial' ? props.theme.primaryColor : props.theme.accentColor)};
+  /* box-shadow: ${(props) => (props.units === 'imperial' ? `inset 0 3px 8px ${props.theme.primaryColor}` : 'none')}; */
   cursor: ${(props) => (props.units === 'imperial' ? 'default' : 'pointer')};
   border-radius: 0 1rem 1rem 0;
 `;

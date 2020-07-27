@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Autosuggest from 'react-autosuggest';
 import { countryCodes } from '../data/countryCodes';
-import { color_subtle, color_light_blue, color_dark, mobile } from '../styles/styles';
+import { mobile } from '../styles/styles';
 
 export const SearchBar = ({ searchCountry, setSearchCountry, formVisible }) => {
   const [suggestions, setSuggestions] = useState([]);
@@ -66,9 +66,9 @@ const SearchContainer = styled.div`
   }
   .react-autosuggest__container .react-autosuggest__input {
     background: none;
-    color: ${color_subtle};
+    color: ${props => props.theme.primaryTextColor};
     border: none;
-    border-bottom: 1px solid ${color_light_blue};
+    border-bottom: 1px solid ${props => props.theme.accentColor};
     box-shadow: none;
     outline: none;
     padding: 0.3rem;
@@ -81,8 +81,8 @@ const SearchContainer = styled.div`
   }
 
   .react-autosuggest__container .react-autosuggest__suggestions-container {
-    background-color: ${color_subtle};
-    color: ${color_dark};
+    background-color: ${props => props.theme.primaryTextColor};
+    color: ${props => props.theme.primaryColor};
     max-height: 7rem;
     border-top: none;
     width: 15rem;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { FlexFunc, color_light_blue, color_dark } from '../styles/styles';
+import { FlexFunc } from '../styles/styles';
 
 const WeatherDayUnit = ({ weather, units, day, setActive, active }) => {
   return (
@@ -21,9 +21,9 @@ export default WeatherDayUnit;
 const WeatherUnit = styled.div`
 ${FlexFunc('column', 'center', 'space-evenly')}
 cursor: ${props => (props.active === props.day ? 'default' : 'pointer')};
-background-color: ${props => (props.active === props.day ? color_light_blue : 'none')};
-  color: ${props => (props.active === props.day? color_dark : color_light_blue)};
-  box-shadow: ${props => (props.active === props.day ? 'inset 0 3px 8px #000' : 'none')};
+background-color: ${props => (props.active === props.day ? props.theme.accentColor : 'none')};
+  color: ${props => (props.active === props.day? props.theme.primaryColor : props.theme.accentColor)};
+  /* box-shadow: ${props => (props.active === props.day ? 'inset 0 3px 8px #000' : 'none')}; */
   padding: 1rem;
 `;
 

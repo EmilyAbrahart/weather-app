@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
+import styled, { ThemeProvider } from 'styled-components';
 import ContentLayout from './ContentLayout';
-import { FlexFunc, color_dark, tablet } from '../styles/styles';
+import { FlexFunc, tablet, darkTheme, lightTheme, Sun, Moon, mobile } from '../styles/styles';
 
 function App() {
   const [weather, setWeather] = useState('');
@@ -17,6 +17,7 @@ function App() {
   const [searchCountry, setSearchCountry] = useState('');
   const [missingQuery, setMissingQuery] = useState(false);
   const [formVisible, setFormVisible] = useState(true);
+  const [dark, setDark] = useState(false);
 
   const getWeather = (e) => {
     e.preventDefault();
@@ -108,34 +109,39 @@ function App() {
   }, [data]);
 
   return (
-    <AppContainer>
-      <ContentLayout
-        weather={weather}
-        city={city}
-        country={country}
-        getWeather={getWeather}
-        setUnits={setUnits}
-        units={units}
-        isLoading={isLoading}
-        active={active}
-        setActive={setActive}
-        error={error}
-        searchCity={searchCity}
-        setSearchCity={setSearchCity}
-        searchCountry={searchCountry}
-        setSearchCountry={setSearchCountry}
-        missingQuery={missingQuery}
-        formVisible={formVisible}
-        setFormVisible={setFormVisible}
-      />
-    </AppContainer>
+    <ThemeProvider theme={dark ? darkTheme : lightTheme}>
+      <AppContainer>
+        <ThemeButton onClick={() => setDark(!dark)}>{dark ? <Sun /> : <Moon />}</ThemeButton>
+        <ContentLayout
+          weather={weather}
+          city={city}
+          country={country}
+          getWeather={getWeather}
+          setUnits={setUnits}
+          units={units}
+          isLoading={isLoading}
+          active={active}
+          setActive={setActive}
+          error={error}
+          searchCity={searchCity}
+          setSearchCity={setSearchCity}
+          searchCountry={searchCountry}
+          setSearchCountry={setSearchCountry}
+          missingQuery={missingQuery}
+          formVisible={formVisible}
+          setFormVisible={setFormVisible}
+          setDark={setDark}
+          dark={dark}
+        />
+      </AppContainer>
+    </ThemeProvider>
   );
 }
 
 export default App;
 
 const AppContainer = styled.div`
-  background-color: ${color_dark};
+  background-color: ${(props) => props.theme.primaryColor};
   background-position: fixed;
   ${FlexFunc('column', 'center', 'center')};
   width: 100%;
@@ -147,4 +153,41 @@ const AppContainer = styled.div`
     overflow-y: scroll;
     padding-top: 5rem;
   }
+`;
+const ThemeButton = styled.button`
+  color: ${props => props.theme.primaryColor};
+  background: ${props => props.theme.primaryColor};
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid ${props => props.theme.accentColor};
+  margin: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  svg {
+    height: 1.5rem;
+    fill: ${props => props.theme.accentColor};
+  }
+
+  @media ${mobile} {
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    svg {
+      height: 1rem;
+    }
+  }
+
+  &:hover {
+    background: ${props => props.theme.accentColor};
+    svg {
+    fill: ${props => props.theme.primaryColor};
+  }
+  }
+
+
 `;
