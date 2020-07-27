@@ -9,7 +9,7 @@ const Weather = ({
   country,
   weather,
   isLoading,
-  units,
+  weatherUnits,
   active,
   setActive,
   error,
@@ -37,22 +37,20 @@ const Weather = ({
             <div />
           </div>
         </SpinnerDiv>
-      ) : 
-      missingQuery ? (
+      ) : missingQuery ? (
         <div>Please enter a city and country.</div>
-      ) : 
-      error ? (
+      ) : error ? (
         <div>No results found for that location.</div>
       ) : weather ? (
         <WeatherContainer>
           <OneDayWeather
             weather={weather}
-            units={units}
+            weatherUnits={weatherUnits}
             active={active}
             city={city}
             country={country}
           />
-          <FiveDayWeather weather={weather} units={units} setActive={setActive} active={active} />
+          <FiveDayWeather weather={weather} weatherUnits={weatherUnits} setActive={setActive} active={active} />
         </WeatherContainer>
       ) : null}
     </Container>
@@ -72,7 +70,7 @@ const Container = styled.div`
     max-height: initial;
     height: auto;
     max-width: 100vh;
-	}
+  }
 `;
 
 const WeatherContainer = styled.div`

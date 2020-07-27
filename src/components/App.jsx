@@ -17,6 +17,7 @@ function App() {
   const [searchCountry, setSearchCountry] = useState('');
   const [missingQuery, setMissingQuery] = useState(false);
   const [formVisible, setFormVisible] = useState(true);
+  const [weatherUnits, setWeatherUnits] = useState('');
   const [dark, setDark] = useState(false);
 
   const getWeather = (e) => {
@@ -27,6 +28,11 @@ function App() {
     if (searchCity && searchCountry) {
       setIsLoading(true);
 
+      if (units === 'metric') {
+        setWeatherUnits('metric');
+      } else {
+        setWeatherUnits('imperial');
+      }
       const url = `https://api.openweathermap.org/data/2.5/forecast?q=${searchCity},${searchCountry}&APPID=${process.env.REACT_APP_WEATHER_API_KEY}&units=${units}`;
 
       axios
@@ -130,6 +136,8 @@ function App() {
           missingQuery={missingQuery}
           formVisible={formVisible}
           setFormVisible={setFormVisible}
+          weatherUnits={weatherUnits}
+          setWeatherUnits={setWeatherUnits}
           setDark={setDark}
           dark={dark}
         />
@@ -155,11 +163,11 @@ const AppContainer = styled.div`
   }
 `;
 const ThemeButton = styled.button`
-  color: ${props => props.theme.primaryColor};
-  background: ${props => props.theme.primaryColor};
+  color: ${(props) => props.theme.primaryColor};
+  background: ${(props) => props.theme.primaryColor};
   padding: 0.5rem 1rem;
   border-radius: 1rem;
-  border: 1px solid ${props => props.theme.accentColor};
+  border: 1px solid ${(props) => props.theme.accentColor};
   margin: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -171,7 +179,7 @@ const ThemeButton = styled.button`
 
   svg {
     height: 1.5rem;
-    fill: ${props => props.theme.accentColor};
+    fill: ${(props) => props.theme.accentColor};
   }
 
   @media ${mobile} {
@@ -185,11 +193,9 @@ const ThemeButton = styled.button`
   }
 
   &:hover {
-    background: ${props => props.theme.accentColor};
+    background: ${(props) => props.theme.accentColor};
     svg {
-    fill: ${props => props.theme.primaryColor};
+      fill: ${(props) => props.theme.primaryColor};
+    }
   }
-  }
-
-
 `;

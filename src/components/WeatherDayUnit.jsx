@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { FlexFunc } from '../styles/styles';
 
-const WeatherDayUnit = ({ weather, units, day, setActive, active }) => {
+const WeatherDayUnit = ({ weather, weatherUnits, day, setActive, active }) => {
   return (
     <WeatherUnit onClick={() => setActive(day)} active={active} day={day}>
       <UnitTitle>{day === 'one' ? 'Today' : moment(weather[day].date).format('dddd')}</UnitTitle>
       <UnitTemp>
         {Math.round(weather[day].temp)}
-        {units === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
+        {weatherUnits === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
       </UnitTemp>
       <img src={`https://openweathermap.org/img/wn/${weather[day].icon}@2x.png`} alt="" />
     </WeatherUnit>

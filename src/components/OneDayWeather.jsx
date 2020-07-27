@@ -3,7 +3,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 import { FlexFunc, mobile } from '../styles/styles';
 
-const OneDayWeather = ({ weather, units, active, city, country }) => {
+const OneDayWeather = ({ weather, weatherUnits, active, city, country }) => {
   return (
     <OneDayWeatherContainer>
       <BannerContainer>
@@ -25,14 +25,14 @@ const OneDayWeather = ({ weather, units, active, city, country }) => {
           {weather[active].temp && (
             <Temp>
               {Math.round(weather[active].temp)}
-              {units === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
+              {weatherUnits === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
             </Temp>
           )}
           <Details>
             {weather[active].temp_feel && (
               <div>
                 Feels Like: {Math.round(weather[active].temp_feel)}
-                {units === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
+                {weatherUnits === 'metric' ? <span>&deg;C</span> : <span>&deg;F</span>}
               </div>
             )}
             {weather[active].humidity && (
@@ -41,7 +41,7 @@ const OneDayWeather = ({ weather, units, active, city, country }) => {
             {weather[active].wind_speed && (
               <div>
                 Wind: {Math.round(weather[active].wind_speed)}
-                {units === 'metric' ? 'm/s' : 'mph'}
+                {weatherUnits === 'metric' ? 'm/s' : 'mph'}
               </div>
             )}
           </Details>

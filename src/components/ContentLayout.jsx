@@ -22,6 +22,8 @@ const ContentLayout = ({
   missingQuery,
   formVisible,
   setFormVisible,
+  weatherUnits,
+  setWeatherUnits
 }) => {
   return (
     <ContentLayoutContainer>
@@ -36,6 +38,7 @@ const ContentLayout = ({
         setSearchCountry={setSearchCountry}
         formVisible={formVisible}
         setFormVisible={setFormVisible}
+        setWeatherUnits={setWeatherUnits}
       />
       <Weather
         weather={weather}
@@ -47,6 +50,7 @@ const ContentLayout = ({
         setActive={setActive}
         error={error}
         missingQuery={missingQuery}
+        weatherUnits={weatherUnits}
       />
     </ContentLayoutContainer>
   );
