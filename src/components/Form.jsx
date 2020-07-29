@@ -68,6 +68,7 @@ const FormContainer = styled.div`
   ${FlexFunc('column', 'center', 'flex-start')}
   height:400px;
   padding: 2rem;
+  flex-shrink: 0;
 
   h1 {
     align-self: center;
@@ -85,7 +86,8 @@ const FormContainer = styled.div`
 `;
 
 const StyledForm = styled.form`
-  ${FlexFunc('column', 'space-evenly', 'center')}
+  ${FlexFunc('column', 'space-evenly', 'center')};
+  flex-shrink: 0;
   @media ${mobile} {
     transition: all 0.5s linear;
     max-height: ${(props) => (props.formVisible ? 'initial' : '0')};
